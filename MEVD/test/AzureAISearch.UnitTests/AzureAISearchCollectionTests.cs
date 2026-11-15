@@ -248,9 +248,7 @@ public class AzureAISearchCollectionTests
     public async Task CanDeleteRecordAsync(bool useDefinition)
     {
         // Arrange.
-#pragma warning disable Moq1002 // Moq: No matching constructor
-        var indexDocumentsResultMock = new Mock<IndexDocumentsResult>(MockBehavior.Strict, new List<IndexingResult>());
-#pragma warning restore Moq1002 // Moq: No matching constructor
+        var indexDocumentsResult = SearchModelFactory.IndexDocumentsResult(new List<IndexingResult>());
 
         this._searchClientMock.Setup(
             x => x.DeleteDocumentsAsync(
@@ -258,7 +256,7 @@ public class AzureAISearchCollectionTests
                 It.IsAny<IEnumerable<string>>(),
                 It.IsAny<IndexDocumentsOptions>(),
                 this._testCancellationToken))
-            .ReturnsAsync(Response.FromValue(indexDocumentsResultMock.Object, Mock.Of<Response>()));
+            .ReturnsAsync(Response.FromValue(indexDocumentsResult, Mock.Of<Response>()));
 
         using var sut = this.CreateRecordCollection(useDefinition);
 
@@ -283,9 +281,7 @@ public class AzureAISearchCollectionTests
     public async Task CanDeleteManyRecordsWithVectorsAsync(bool useDefinition)
     {
         // Arrange.
-#pragma warning disable Moq1002 // Moq: No matching constructor
-        var indexDocumentsResultMock = new Mock<IndexDocumentsResult>(MockBehavior.Strict, new List<IndexingResult>());
-#pragma warning restore Moq1002 // Moq: No matching constructor
+        var indexDocumentsResult = SearchModelFactory.IndexDocumentsResult(new List<IndexingResult>());
 
         this._searchClientMock.Setup(
             x => x.DeleteDocumentsAsync(
@@ -293,7 +289,7 @@ public class AzureAISearchCollectionTests
                 It.IsAny<IEnumerable<string>>(),
                 It.IsAny<IndexDocumentsOptions>(),
                 this._testCancellationToken))
-            .ReturnsAsync(Response.FromValue(indexDocumentsResultMock.Object, Mock.Of<Response>()));
+            .ReturnsAsync(Response.FromValue(indexDocumentsResult, Mock.Of<Response>()));
 
         using var sut = this.CreateRecordCollection(useDefinition);
 
@@ -318,14 +314,12 @@ public class AzureAISearchCollectionTests
     public async Task CanUpsertRecordAsync(bool useDefinition)
     {
         // Arrange upload result object.
-#pragma warning disable Moq1002 // Moq: No matching constructor
-        var indexingResult = new Mock<IndexingResult>(MockBehavior.Strict, TestRecordKey1, true, 200);
+        var indexingResult = SearchModelFactory.IndexingResult(TestRecordKey1, null, true, 200);
         var indexingResults = new List<IndexingResult>
         {
-            indexingResult.Object
+            indexingResult
         };
-        var indexDocumentsResultMock = new Mock<IndexDocumentsResult>(MockBehavior.Strict, indexingResults);
-#pragma warning restore Moq1002 // Moq: No matching constructor
+        var indexDocumentsResult = SearchModelFactory.IndexDocumentsResult(indexingResults);
 
         // Arrange upload.
         this._searchClientMock.Setup(
@@ -333,7 +327,7 @@ public class AzureAISearchCollectionTests
                 It.IsAny<IEnumerable<JsonObject>>(),
                 It.IsAny<IndexDocumentsOptions>(),
                 this._testCancellationToken))
-            .ReturnsAsync(Response.FromValue(indexDocumentsResultMock.Object, Mock.Of<Response>()));
+            .ReturnsAsync(Response.FromValue(indexDocumentsResult, Mock.Of<Response>()));
 
         // Arrange sut.
         using var sut = this.CreateRecordCollection(useDefinition);
@@ -360,17 +354,15 @@ public class AzureAISearchCollectionTests
     public async Task CanUpsertManyRecordsAsync(bool useDefinition)
     {
         // Arrange upload result object.
-#pragma warning disable Moq1002 // Moq: No matching constructor
-        var indexingResult1 = new Mock<IndexingResult>(MockBehavior.Strict, TestRecordKey1, true, 200);
-        var indexingResult2 = new Mock<IndexingResult>(MockBehavior.Strict, TestRecordKey2, true, 200);
+        var indexingResult1 = SearchModelFactory.IndexingResult(TestRecordKey1, null, true, 200);
+        var indexingResult2 = SearchModelFactory.IndexingResult(TestRecordKey2, null, true, 200);
 
         var indexingResults = new List<IndexingResult>
         {
-            indexingResult1.Object,
-            indexingResult2.Object
+            indexingResult1,
+            indexingResult2
         };
-        var indexDocumentsResultMock = new Mock<IndexDocumentsResult>(MockBehavior.Strict, indexingResults);
-#pragma warning restore Moq1002 // Moq: No matching constructor
+        var indexDocumentsResult = SearchModelFactory.IndexDocumentsResult(indexingResults);
 
         // Arrange upload.
         this._searchClientMock.Setup(
@@ -378,7 +370,7 @@ public class AzureAISearchCollectionTests
                 It.IsAny<IEnumerable<JsonObject>>(),
                 It.IsAny<IndexDocumentsOptions>(),
                 this._testCancellationToken))
-            .ReturnsAsync(Response.FromValue(indexDocumentsResultMock.Object, Mock.Of<Response>()));
+            .ReturnsAsync(Response.FromValue(indexDocumentsResult, Mock.Of<Response>()));
 
         // Arrange sut.
         using var sut = this.CreateRecordCollection(useDefinition);

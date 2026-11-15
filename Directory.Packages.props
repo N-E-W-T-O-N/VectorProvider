@@ -6,12 +6,11 @@
     <PackageVersion Include="Microsoft.Extensions.AI.Abstractions" Version="10.8.3" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
   </ItemGroup>
-
   <ItemGroup Label="MEVD">
     <PackageVersion Include="Microsoft.Extensions.VectorData.Abstractions" Version="10.8.2" />
     <PackageVersion Include="Microsoft.Extensions.VectorData.ConformanceTests" Version="10.8.2" />
 
-    <PackageVersion Include="Azure.Search.Documents" Version="11.7.0" />
+    <PackageVersion Include="Azure.Search.Documents" Version="12.0.0" />
     <PackageVersion Include="ChromaDotNet.Client" Version="2.20.0" />
     <PackageVersion Include="Microsoft.Azure.Cosmos" Version="3.61.0" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.6" />
@@ -31,7 +30,7 @@
     <PackageVersion Include="Microsoft.Extensions.DocumentExtraction.Abstractions" Version="11.0.0-preview.1.26560.3" />
     <PackageVersion Include="Azure.AI.ContentUnderstanding" Version="1.1.0" />
     <PackageVersion Include="Azure.AI.DocumentIntelligence" Version="1.0.0" />
-    <PackageVersion Include="Azure.Core" Version="1.53.0" />
+    <PackageVersion Include="Azure.Core" Version="1.65.0" />
     <PackageVersion Include="PdfPig" Version="0.1.15" />
   </ItemGroup>
 
@@ -40,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Test">
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.10" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.10" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.10" />
@@ -53,13 +52,15 @@
     <PackageVersion Include="coverlet.collector" Version="8.0.1" />
     <PackageVersion Include="Humanizer" Version="3.0.10" />
     <PackageVersion Include="Moq" Version="4.20.72" />
-    <PackageVersion Include="Testcontainers" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.CosmosDb" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.Milvus" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.MsSql" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.Qdrant" Version="4.14.0" />
-    <PackageVersion Include="Testcontainers.Redis" Version="4.14.0" />
+    <!-- Microsoft.Azure.Cosmos needs Newtonsoft.Json at run time; Microsoft.NET.Test.Sdk 18.12 no longer brings it. -->
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="Testcontainers" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.CosmosDb" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.Milvus" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.Qdrant" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.Redis" Version="4.16.0" />
   </ItemGroup>
 
 </Project>

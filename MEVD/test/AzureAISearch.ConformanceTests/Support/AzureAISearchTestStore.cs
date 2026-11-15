@@ -75,7 +75,8 @@ internal sealed class AzureAISearchTestStore : TestStore
         {
             try
             {
-                await Client.DeleteIndexAsync(name);
+                // Azure.Search.Documents 12 adds an overload with MatchConditions: pass the token to pick the plain one.
+                await Client.DeleteIndexAsync(name, CancellationToken.None);
             }
             catch
             {
